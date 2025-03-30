@@ -12,50 +12,55 @@ body {
     background-color: #f5f7fa;
     color: #333;
     line-height: 1.6;
+    -webkit-text-size-adjust: 100%;
+    /* Prevent font scaling in landscape */
 }
 
 .admin-container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 20px;
+    padding: 15px;
+    width: 100%;
 }
 
 .header {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-between !important;
     align-items: center !important;
-    align-content: center;
-    /* padding: 10px 0; */
+    /* flex-wrap: wrap; */
+    gap: 10px;
+    /* margin-bottom: 15px; */
 }
 
 /* Header styles */
 h1 {
     color: #2c3e50;
-    margin-bottom: 20px;
-    font-size: 2rem;
+    margin-bottom: 15px;
+    font-size: 1.8rem;
     border-bottom: 2px solid #3498db;
-    padding-bottom: 10px;
+    padding-bottom: 8px;
+    width: 100%;
 }
 
 h2 {
     color: #2c3e50;
-    margin: 20px 0 15px;
-    font-size: 1.5rem;
+    margin: 15px 0 12px;
+    font-size: 1.4rem;
 }
 
 h3 {
     color: #3498db;
-    margin: 15px 0 10px;
-    font-size: 1.2rem;
+    margin: 12px 0 8px;
+    font-size: 1.1rem;
 }
 
 h4 {
     font-size: 1rem;
-    margin: 10px 0;
+    margin: 8px 0;
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    gap: 10px;
+    gap: 8px;
 }
 
 /* Button styles */
@@ -66,10 +71,13 @@ button {
     border: none;
     border-radius: 4px;
     padding: 8px 12px;
-    margin: 5px;
+    margin: 3px;
     cursor: pointer;
     font-size: 14px;
     transition: background-color 0.3s ease;
+    white-space: nowrap;
+    touch-action: manipulation;
+    /* Improves touch behavior */
 }
 
 button:hover {
@@ -102,22 +110,25 @@ button:hover {
 
 .navigation-buttons {
     display: flex;
-    gap: 10px;
-    margin-bottom: 20px;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 15px;
 }
 
 /* Product buttons */
 .products-list {
     display: flex;
     flex-wrap: wrap;
-    gap: 10px;
-    margin-bottom: 20px;
+    gap: 8px;
+    margin-bottom: 15px;
 }
 
 .product-button {
     background-color: #ecf0f1;
     color: #2c3e50;
     border: 1px solid #bdc3c7;
+    min-height: 36px;
+    /* Minimum touch target size */
 }
 
 .product-button:hover {
@@ -130,18 +141,21 @@ button:hover {
     align-items: center;
     margin-bottom: 10px;
     flex-wrap: wrap;
-    gap: 10px;
+    gap: 8px;
 }
 
 input[type="text"],
 input[type="number"],
 input[type="date"] {
-    padding: 8px 10px;
+    padding: 10px;
     border: 1px solid #ddd;
     border-radius: 4px;
-    font-size: 14px;
+    font-size: 16px;
+    /* Larger font for mobile */
     flex: 1;
     min-width: 100px;
+    -webkit-appearance: none;
+    /* Remove iOS default styling */
 }
 
 input[type="text"]:focus,
@@ -154,15 +168,16 @@ input[type="date"]:focus {
 
 .form-actions {
     display: flex;
-    gap: 10px;
-    margin: 15px 0;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 12px 0;
 }
 
 .add-product-form {
     display: flex;
     flex-wrap: wrap;
-    gap: 10px;
-    margin-bottom: 20px;
+    gap: 8px;
+    margin-bottom: 15px;
     align-items: flex-end;
 }
 
@@ -170,32 +185,83 @@ input[type="date"]:focus {
 .sales-table {
     width: 100%;
     border-collapse: collapse;
-    margin: 20px 0;
+    margin: 15px 0;
     background-color: white;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    font-size: 14px;
+    table-layout: fixed;
 }
 
 .sales-table th {
     background-color: #3498db;
     color: white;
-    padding: 12px;
+    padding: 10px 8px;
     text-align: left;
 }
 
 .sales-table td {
-    padding: 10px 12px;
+    padding: 8px;
     border-bottom: 1px solid #eee;
+    word-break: break-word;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.sales-table th.date-column,
+.sales-table td.date-column {
+    width: 90px;
+}
+
+.sales-table th.items-column,
+.sales-table td.items-column {
+    width: 40%;
+}
+
+.sales-table th.price-column,
+.sales-table td.price-column {
+    width: 80px;
+}
+
+.sales-table th.actions-column,
+.sales-table td.actions-column {
+    width: 100px;
 }
 
 .sales-table tbody tr:hover {
     background-color: #f5f7fa;
 }
 
+/* Custom date format display */
+.date-display {
+    font-size: 0.9rem;
+    display: block;
+    white-space: nowrap;
+}
+
+.date-display .day-month {
+    display: block;
+    font-weight: bold;
+}
+
+.date-display .year {
+    display: block;
+    color: #7f8c8d;
+    font-size: 0.8rem;
+}
+
 .date-header {
     background-color: #ecf0f1;
-    padding: 10px;
-    margin: 20px 0 10px;
+    padding: 8px;
+    margin: 15px 0 8px;
     border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.date-header .date-text {
+    font-size: 0.95rem;
+    white-space: nowrap;
 }
 
 .total-row {
@@ -205,41 +271,50 @@ input[type="date"]:focus {
 
 .items-list {
     list-style: none;
-    margin: 5px 0;
+    margin: 3px 0;
 }
 
 .items-list li {
-    padding: 3px 0;
+    padding: 2px 0;
+    margin-bottom: 4px;
+    white-space: normal;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 /* Products list styles */
 .products-table {
     width: 100%;
     border-collapse: collapse;
-    margin-top: 15px;
+    margin-top: 12px;
     background-color: white;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    font-size: 14px;
+    table-layout: fixed;
 }
 
 .products-table th {
     background-color: #3498db;
     color: white;
-    padding: 10px;
+    padding: 8px;
     text-align: left;
 }
 
 .products-table td {
-    padding: 10px;
+    padding: 8px;
     border-bottom: 1px solid #eee;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .product-row {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px;
+    padding: 8px;
     border-bottom: 1px solid #eee;
     background-color: white;
+    flex-wrap: wrap;
 }
 
 /* Card styles */
@@ -247,44 +322,78 @@ input[type="date"]:focus {
     background-color: white;
     border-radius: 6px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    margin-bottom: 20px;
+    padding: 15px;
+    margin-bottom: 15px;
+    overflow-x: auto;
+    /* Allow horizontal scrolling for tables */
 }
 
 /* Date selection and totals */
 .sales-header {
-    margin-bottom: 20px;
+    margin-bottom: 15px;
 }
 
 .totals-row {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     font-weight: bold;
     color: #2c3e50;
-    margin: 10px 0;
-    padding-bottom: 10px;
+    margin: 8px 0;
+    padding-bottom: 8px;
     border-bottom: 1px dashed #ddd;
+    gap: 8px;
 }
 
 .selected-date-total {
     color: #3498db;
+    display: block;
+    width: 100%;
+    margin-top: 5px;
+}
+
+/* Improved date selector */
+.date-filter {
+    width: 100%;
+    margin-top: 10px;
 }
 
 .date-selector {
     display: flex;
     flex-wrap: wrap;
-    align-items: center;
-    gap: 8px;
-    margin-top: 10px;
+    gap: 6px;
+    margin-top: 8px;
+}
+
+.date-selector span {
+    font-weight: bold;
+    display: block;
+    width: 100%;
+    margin-bottom: 5px;
+}
+
+.date-btn-group {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    width: 100%;
+    gap: 6px;
+    margin-bottom: 10px;
 }
 
 .date-btn {
-    padding: 6px 12px;
+    padding: 10px;
     background-color: #e8f4fd;
     color: #2980b9;
     border: 1px solid #b6d9f2;
+    min-height: 44px;
+    /* Better touch target size */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-weight: 600;
+    border-radius: 4px;
 }
 
 .date-btn.active {
@@ -293,38 +402,105 @@ input[type="date"]:focus {
     border-color: #2980b9;
 }
 
+.date-input-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-top: 5px;
+}
+
+.date-input-container label {
+    font-size: 14px;
+    margin-bottom: 4px;
+    font-weight: 600;
+    color: #2c3e50;
+}
+
 .date-input {
-    padding: 6px 10px;
+    padding: 10px;
     border: 1px solid #ddd;
     border-radius: 4px;
-    width: auto;
+    width: 100%;
+    font-size: 16px;
+    -webkit-appearance: none;
+    /* Remove iOS default styling */
+    min-height: 44px;
+    /* Better touch target size */
+    background-color: #fff;
 }
 
 .no-data {
     text-align: center;
-    padding: 20px;
+    padding: 15px;
     color: #7f8c8d;
     background-color: #f9f9f9;
     border-radius: 4px;
-    margin: 10px 0;
+    margin: 8px 0;
 }
 
-/* Responsive styles */
+/* Improved responsive styles */
 @media (max-width: 768px) {
+    .admin-container {
+        padding: 10px;
+    }
+
+    .header {
+        /* flex-direction: column; */
+        align-items:center;
+        justify-content: space-evenly !important;
+    }
+
+    h1 {
+        font-size: 1.5rem;
+        margin-bottom: 10px;
+    }
+
     .input-row {
         flex-direction: column;
         align-items: stretch;
     }
 
     input[type="text"],
-    input[type="number"] {
+    input[type="number"],
+    input[type="date"] {
         width: 100%;
+        margin: 3px 0;
     }
 
     .sales-table {
         display: block;
         overflow-x: auto;
-        white-space: nowrap;
+        white-space: normal;
+        font-size: 13px;
+        table-layout: auto;
+    }
+
+    .sales-table th,
+    .sales-table td {
+        padding: 8px 6px;
+    }
+
+    .sales-table th.date-column,
+    .sales-table td.date-column {
+        width: 80px;
+        min-width: 80px;
+        max-width: 80px;
+    }
+
+    .sales-table th.price-column,
+    .sales-table td.price-column {
+        width: 70px;
+        min-width: 70px;
+    }
+
+    .sales-table th.actions-column,
+    .sales-table td.actions-column {
+        width: 90px;
+        min-width: 90px;
+    }
+
+    .date-header .date-text {
+        font-size: 0.85rem;
     }
 
     h4 {
@@ -332,25 +508,186 @@ input[type="date"]:focus {
         align-items: flex-start;
     }
 
-    h4 button {
-        margin-top: 5px;
-    }
-
-    .navigation-buttons,
-    .date-selector {
-        flex-wrap: wrap;
+    .navigation-buttons {
+        width: 100%;
+        justify-content: flex-start;
     }
 
     .form-actions {
-        flex-wrap: wrap;
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .form-actions button {
+        margin: 3px 0;
     }
 
     .totals-row {
         flex-direction: column;
         align-items: flex-start;
+        font-size: 1rem;
     }
 
     .selected-date-total {
-        margin-top: 5px;
+        margin-top: 3px;
+    }
+
+    .card {
+        padding: 10px;
+        border-radius: 4px;
+    }
+
+    button {
+        padding: 10px;
+        margin: 3px 0;
+    }
+}
+
+/* iPhone specific adjustments */
+@media (max-width: 480px) {
+    .admin-container {
+        padding: 8px;
+    }
+
+    body {
+        font-size: 14px;
+    }
+
+    h1 {
+        font-size: 1.3rem;
+    }
+
+    h2 {
+        font-size: 1.2rem;
+    }
+
+    h3 {
+        font-size: 1rem;
+    }
+
+    .sales-table {
+        font-size: 12px;
+    }
+
+    .date-display {
+        font-size: 0.8rem;
+    }
+
+    .date-display .year {
+        font-size: 0.7rem;
+    }
+
+    .items-list li {
+        font-size: 12px;
+        padding: 1px 0;
+    }
+
+    .totals-row {
+        font-size: 0.9rem;
+    }
+
+    .date-header {
+        padding: 6px;
+    }
+
+    .date-header .date-text {
+        font-size: 0.8rem;
+    }
+
+    /* Date selector specific adjustments for iPhone */
+    .date-btn-group {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    /* More compact date display for mobile */
+    .sales-table th.date-column,
+    .sales-table td.date-column {
+        width: 70px;
+        min-width: 70px;
+        max-width: 70px;
+    }
+
+    /* Ensure table cells don't get too squeezed */
+    .sales-table th:nth-child(2),
+    .sales-table td:nth-child(2) {
+        min-width: 120px;
+    }
+
+    .sales-table th.price-column,
+    .sales-table td.price-column {
+        width: 60px;
+        min-width: 60px;
+    }
+
+    .sales-table th.actions-column,
+    .sales-table td.actions-column {
+        width: 80px;
+        min-width: 80px;
+    }
+}
+
+/* Date picker JavaScript enhancement styles */
+.date-picker-container {
+    position: relative;
+    width: 100%;
+}
+
+.calendar-popup {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 10;
+    padding: 10px;
+    margin-top: 5px;
+}
+
+.calendar-popup.show {
+    display: block;
+}
+
+/* Additional mobile optimizations for grid display */
+@media (min-width: 481px) {
+    .date-btn-group {
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    .date-input-container {
+        width: 100%;
+        max-width: 250px;
+    }
+}
+
+/* Add this code to create a more compact date format for "Mar 30, 2025" */
+.compact-date {
+    white-space: nowrap;
+    font-size: 0.9rem;
+}
+
+.compact-date .month-day {
+    font-weight: 600;
+}
+
+.compact-date .year {
+    font-size: 0.8rem;
+    color: #7f8c8d;
+    margin-left: 2px;
+}
+
+/* For extremely small screens, show ultra-compact date */
+@media (max-width: 360px) {
+    .compact-date {
+        font-size: 0.8rem;
+    }
+
+    .compact-date .month-day,
+    .compact-date .year {
+        display: block;
+        line-height: 1.2;
     }
 }

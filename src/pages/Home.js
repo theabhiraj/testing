@@ -154,6 +154,17 @@ const Home = () => {
       }, 0);
   };
 
+  // Calculate total for a specific date
+  const getDateTotal = (date) => {
+    if (!salesByDate[date] || salesByDate[date].length === 0) {
+      return 0;
+    }
+    
+    return salesByDate[date].reduce((total, sale) => {
+      return total + (sale.total || sale.entries.reduce((sum, entry) => sum + parseFloat(entry.price || 0), 0));
+    }, 0);
+  };
+
   // Get the sales data to display based on filter
   const salesDataToDisplay = selectedDate === "all" ? salesByDate : getFilteredSales();
   const selectedDateTotal = getSelectedDateTotal();
@@ -161,7 +172,7 @@ const Home = () => {
   return (
     <div className="admin-container">
       <div className="header">
-        <h1>Sales Dashboard</h1>
+        <h1>Sales D.</h1>
         
         <div className="navigation-buttons">
           <button onClick={() => navigate("/login")}>Admin Login</button>
@@ -230,6 +241,7 @@ const Home = () => {
                    date === new Date(Date.now() - 86400000).toLocaleDateString() ? "Yesterday" : 
                    date === new Date(Date.now() - 172800000).toLocaleDateString() ? "Day Before Yesterday" : 
                    date}
+                  {selectedDate === "all" && ` - Total: ₹${getDateTotal(date).toFixed(2)}`}
                 </h3>
               </div>
               
@@ -264,6 +276,17 @@ const Home = () => {
                         </tr>
                       );
                     })}
+                    <tr className="total-row">
+                      <td colSpan="2" style={{textAlign: "right"}}>Date Total:</td>
+                      <td>₹{
+                        salesDataToDisplay[date].reduce((total, sale) => {
+                          const saleTotal = sale.total || sale.entries.reduce(
+                            (sum, entry) => sum + parseFloat(entry.price || 0), 0
+                          );
+                          return total + saleTotal;
+                        }, 0).toFixed(2)
+                      }</td>
+                    </tr>
                   </tbody>
                 </table>
               )}
@@ -271,32 +294,6 @@ const Home = () => {
           ))
         )}
       </div>
-
-      {/* <div className="card">
-        <h2>Available Products</h2>
-        <table className="products-table">
-          <thead>
-            <tr>
-              <th>Product</th>
-              <th>Price</th>
-            </tr>
-          </thead>
-          <tbody>
-            {products.length === 0 ? (
-              <tr>
-                <td colSpan="2" className="no-data">No products available</td>
-              </tr>
-            ) : (
-              products.map((product) => (
-                <tr key={product.id}>
-                  <td>{product.name}</td>
-                  <td>₹{product.price}</td>
-                </tr>
-              ))
-            )}
-          </tbody>
-        </table>
-      </div> */}
     </div>
   );
 };
